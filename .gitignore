@@ -1,0 +1,5 @@
+.idea
+dist
+images
+*.log
+.DS_Store
