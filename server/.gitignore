@@ -29,3 +29,4 @@ generator.go
 go.work
 go.work.sum
 server/server
+server/*.html
