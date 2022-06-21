@@ -51,5 +51,8 @@ func HandleOssImageStyle(url, style string) string {
 	if strs.IsBlank(sep) {
 		return url
 	}
-	return strings.Join([]string{url, style}, sep)
+
+	return url
+
+	//return strings.Join([]string{url, style}, sep)
 }

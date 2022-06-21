@@ -1,4 +1,13 @@
 export default {
+  server: {
+    port: 9001, // default: 3000
+    // host: '0.0.0.0', // default: localhost,
+    // host: '0', // default: localhost,
+    // timing: false
+  },
+  
+  telemetry: false,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     htmlAttrs: {
@@ -66,7 +75,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     '@nuxtjs/color-mode',
   ],
 
@@ -76,7 +85,7 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     ['cookie-universal-nuxt', { alias: 'cookies' }],
     [
       '@nuxtjs/google-adsense',

@@ -1,7 +1,6 @@
 package html
 
 import (
-	"fmt"
 	"strings"
 
 	"bbs-go/pkg/text"
@@ -26,8 +25,5 @@ func GetHtmlText(html string) string {
 		logrus.Error(err)
 		return ""
 	}
-	fmt.Println("---------------------")
-	fmt.Println(html)
-	fmt.Println(doc.Text())
 	return doc.Text()
 }

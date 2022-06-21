@@ -7,6 +7,7 @@
           <label v-text="quote.user.nickname" />
           <i class="iconfont icon-close" alt="取消回复" @click="cancelReply" />
         </div>
+        
         <markdown-editor
           v-if="inputMode === 'markdown'"
           ref="mdEditor"
@@ -15,12 +16,21 @@
           placeholder="请发表你的观点..."
           @submit="create"
         />
+
+        
         <text-editor
           v-else
           ref="simpleEditor"
           v-model="value"
           @submit="create"
         />
+        <div class="control"  style="text-align: center;">
+          <a
+            class="button is-success"
+            @click="create"
+            >发表</a
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -66,9 +76,9 @@ export default {
       //   // 手机中，强制使用普通文本编辑器
       //   return 'text'
       // }
-      // return this.mode
+      return this.mode
       // 强制text模式
-      return 'text'
+      // return 'text'
     },
     contentType() {
       return this.inputMode === 'markdown' ? 'markdown' : 'text'

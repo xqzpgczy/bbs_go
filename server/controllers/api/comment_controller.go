@@ -45,6 +45,7 @@ func (c *CommentController) GetReplies() *web.JsonResult {
 	)
 	currentUser := services.UserTokenService.GetCurrent(c.Ctx)
 	comments, cursor, hasMore := services.CommentService.GetReplies(commentId, cursor, 10)
+
 	return web.JsonCursorData(render.BuildComments(comments, currentUser, false, true), strconv.FormatInt(cursor, 10), hasMore)
 }
 

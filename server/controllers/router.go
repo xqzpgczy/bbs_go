@@ -56,7 +56,7 @@ func Router() {
 	//mvc.New(app.Party("/")).Handle(&lotteryController{})
 
 	// 静态文件地址
-	app.HandleDir("/www", "data/www")
+	app.HandleDir("/api", "data/api")
 
 	app.Any("/", func(i iris.Context) {
 		_, _ = i.HTML("<h1>Powered by bbs-go</h1>")

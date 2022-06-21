@@ -3,11 +3,12 @@ package api
 import (
 	"bbs-go/model/constants"
 	"bbs-go/pkg/config"
+	"fmt"
+	"github.com/kataras/iris/v12"
 	"io/ioutil"
 	"strconv"
 	"time"
 
-	"github.com/kataras/iris/v12"
 	"github.com/mlogclub/simple/web"
 	"github.com/sirupsen/logrus"
 
@@ -40,17 +41,19 @@ func (c *UploadController) Post() *web.JsonResult {
 		return web.JsonErrorMsg(err.Error())
 	}
 
-	image_path := "." + config.Instance.StaticPath + "/" + "upload/image/"
+	image_path := "." + config.Instance.StaticPath + "/" + "www/upload/image/"
 	image_name := strconv.Itoa(time.Now().Nanosecond()) + "_" + header.Filename
-	ioutil.WriteFile(image_path+image_name, fileBytes, 0777)
+
+	err = ioutil.WriteFile(image_path+image_name, fileBytes, 0777)
 
 	logrus.Info("上传文件：", header.Filename, " size:", header.Size)
+	fmt.Println(err)
 
 	//url, err := uploader.PutImage(fileBytes, contentType)
 	//if err != nil {
 	//	return web.JsonErrorMsg(err.Error())
 	//}
 
-	url := config.Instance.BaseUrl + ":" + config.Instance.Port + "/www/upload/image/" + image_name
+	url := config.Instance.BaseUrl + "/api/www/upload/image/" + image_name
 	return web.NewEmptyRspBuilder().Put("url", url).JsonResult()
 }

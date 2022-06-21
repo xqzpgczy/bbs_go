@@ -34,7 +34,7 @@ func AuthCodeURL(params map[string]string) string {
 		redirectUrl = getRedirectUrl(params)
 	)
 	ctxCache.Put(state, redirectUrl) // 将跳转地址写入上线文
-	return urls.ParseUrl("https://www.oschina.net/action/oauth2/authorize").AddQueries(map[string]string{
+	return urls.ParseUrl("https://api.oschina.net/action/oauth2/authorize").AddQueries(map[string]string{
 		"client_id":     config.Instance.OSChina.ClientID,
 		"response_type": "code",
 		"redirect_uri":  redirectUrl,
@@ -59,7 +59,7 @@ func GetUserInfoByCode(code, state string) (*UserInfo, error) {
 		"redirect_uri":  redirectUrl,
 		"code":          code,
 		"dataType":      "json",
-	}).Get("https://www.oschina.net/action/openapi/token")
+	}).Get("https://api.oschina.net/action/openapi/token")
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func GetUserInfoByCode(code, state string) (*UserInfo, error) {
 // GetUserInfo 根据accessToken获取用户信息
 func GetUserInfo(accessToken string) (*UserInfo, error) {
 	response, err := resty.New().R().SetQueryParam("access_token", accessToken).
-		Get("https://www.oschina.net/action/openapi/user")
+		Get("https://api.oschina.net/action/openapi/user")
 	if err != nil {
 		logrus.Errorf("Get user info error %s", err)
 		return nil, err

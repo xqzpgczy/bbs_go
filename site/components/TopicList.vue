@@ -113,10 +113,12 @@ export default {
       default: false,
     },
   },
+
   methods: {
     async like(topic) {
       try {
         await this.$axios.post('/api/topic/like/' + topic.topicId)
+        debugger
         topic.liked = true
         topic.likeCount++
         this.$message.success('点赞成功')

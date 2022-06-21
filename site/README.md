@@ -71,3 +71,74 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+
+
+scp -r .nuxt root@194.163.147.93:/opt/bbs-go/site/.
+
+
+pskwl.com
+www.pskwl.com
+
+
+
+
+
+
+
+
+
+
+upstream tomcatserver2 {
+	server 127.0.0.1:9001;
+    }
+
+server
+{
+    listen 80;
+    server_name www.pskwl.com pskwl.com;
+    index index.php index.html index.htm default.php default.htm default.html;
+    root /opt/bbs-go/site;
+    
+    #SSL-START SSL相关配置，请勿删除或修改下一行带注释的404规则
+    #error_page 404/404.html;
+    #SSL-END
+    
+    #ERROR-PAGE-START  错误页配置，可以注释、删除或修改
+    #error_page 404 /404.html;
+    #error_page 502 /502.html;
+    #ERROR-PAGE-END
+    
+    #PHP-INFO-START  PHP引用配置，可以注释或修改
+    #清理缓存规则
+
+    location ~ /purge(/.*) {
+        proxy_cache_purge cache_one $host$1$is_args$args;
+        #access_log  /www/wwwlogs/www.pskwl.com_purge_cache.log;
+    }
+	#引用反向代理规则，注释后配置的反向代理将无效
+	include /www/server/panel/vhost/nginx/proxy/www.pskwl.com/*.conf;
+
+	include enable-php-00.conf;
+    #PHP-INFO-END
+    
+    #REWRITE-START URL重写规则引用,修改后将导致面板设置的伪静态规则失效
+    include /www/server/panel/vhost/rewrite/www.pskwl.com.conf;
+    #REWRITE-END
+    
+    #禁止访问的文件或目录
+    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|LICENSE|README.md)
+    {
+        return 404;
+    }
+    
+    #一键申请SSL证书验证目录相关设置
+    location ~ \.well-known{
+        allow all;
+    }
+    
+    access_log  /www/wwwlogs/www.pskwl.com.log;
+    error_log  /www/wwwlogs/www.pskwl.com.error.log;
+}
+
+

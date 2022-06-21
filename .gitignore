@@ -3,3 +3,4 @@ dist
 images
 *.log
 .DS_Store
+server/data

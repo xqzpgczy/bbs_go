@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS `bbsgo_db` DEFAULT CHARACTER SET utf8mb4;
-USE bbsgo_db;
-SET NAMES utf8mb4;
+-- CREATE DATABASE IF NOT EXISTS `bbsgo_db` DEFAULT CHARACTER SET utf8mb4;
+-- USE bbsgo_db;
+-- SET NAMES utf8mb4;
 -- 初始化用户表
 CREATE TABLE `t_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
